@@ -32,20 +32,21 @@
 </script>
 {% endblock %}
 
-{% block breadcrumb %}
-<ul class="breadcrumb">
-  <li><a href="{% url 'admin:index' %}">Home</a></li>
-  <li><a href="{% url 'admin:index' %}">Level 1</a></li>
-  <li class="active">Level 2</li>
-</ul>
-{% endblock breadcrumb %}
+<!-- Breadcrumbs -->
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "My Bets" views.index %}
+{% endblock %}
+<!-- End Breadcrumbs -->
 
 {% block base_content %}
 <div class="container pages">
     <h1>My Bets</h1>
 
     <div class="container">
-        <h3>Open Bets</h3>
+        <h3>Opening Bets</h3>
         {% if your_open_bets %}
             <table class="table table-striped table-bordered table-condensed">
                 <thead>
@@ -80,7 +81,7 @@
                 </tbody>
             </table>
         {% else %}
-            <p>You don't have any open bets. Step right up and <a href="#place_bets" data-toggle="modal">place a bet.</a></p>
+            <p>You don't have any opening bets. {% if user.is_staff %} Step right up and <a href="#place_bets" data-toggle="modal">place a bet.</a> {% endif %}</p>
         {% endif %}
     </div>
 

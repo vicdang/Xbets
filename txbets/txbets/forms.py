@@ -1,26 +1,62 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.forms.widgets import PasswordInput, TextInput
 from bets.models import UserProfile
 
+
+class CustomAuthForm(AuthenticationForm):
+    username = forms.CharField(widget=TextInput(attrs={'class':'form-control','placeholder': 'Username'}))
+    password = forms.CharField(widget=PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
 
 class SignUpForm(UserCreationForm):
     # declare the fields you will show
     username = forms.EmailField(
         label="Username",
-        help_text="Username should be your email address.")
+        help_text="Username should be your email address.",
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder': 'Username@example.com'}))
     first_name = forms.CharField(
         label="First Name",
         widget=forms.TextInput(
             attrs={
-                'autofocus': 'autofocus'}))
-    last_name = forms.CharField(label="Last Name")
+                'autofocus': 'autofocus',
+                'class':'form-control',
+                'placeholder': 'First Name'}))
+    last_name = forms.CharField(
+        label="Last Name",
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': 'autofocus',
+                'class':'form-control',
+                'placeholder': 'Last Name'}))
     group_id = forms.CharField(
         label="Group ID",
-        help_text="Top secret code to register for this site.")
+        help_text="Top secret code to register for this site.",
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': 'autofocus',
+                'class':'form-control',
+                'placeholder': 'Group ID'}))
+
+    password1 = forms.CharField(
+        label="Password",
+        widget=PasswordInput(
+            attrs={
+                'class':'form-control',
+                 'placeholder':'Password'}))
+    password2 = forms.CharField(
+        label="Confirm Password",
+        widget=PasswordInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Confirm Password'}))
 
     # this sets the order of the fields
-
     class Meta:
         model = User
         fields = (

@@ -21,6 +21,8 @@ from django.views.generic.base import RedirectView
 from django.views.generic.base import TemplateView
 from txbets.views import welcome, sign_up, profile
 
+from txbets.forms import CustomAuthForm
+
 urlpatterns = [
     url(r'^favicon.ico$',
         RedirectView.as_view(
@@ -29,7 +31,8 @@ urlpatterns = [
         name="favicon"),
     url(r'^bets/', include('bets.urls', namespace='bets', app_name='bets')),
     url(r'^$', welcome),
-    url(r'^login/$', auth_views.login, {'template_name': 'base_login.html'}, name='login'),
+    url(r'^welcome', welcome),
+    url(r'^login/$', auth_views.login, {'template_name': 'base_login.html', "authentication_form":CustomAuthForm}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^sign_up/$', sign_up),
     url(r'^password_reset/$', auth_views.password_reset, {'template_name': 'registration/password_reset_form.html'}, name='password_reset'),

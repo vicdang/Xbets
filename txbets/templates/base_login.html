@@ -1,52 +1,57 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block title %}Login{% endblock %}
 
 {% block base_content %}
 <div class="container" style="max-width: 750px;">
-    {% if user.is_authenticated %}
-        <h3>You're already logged in as {{ user.get_full_name }}.</h3>
-    {% else %}
-        <h2>Login</h2>
-        <p>Need an account? <a href="/sign_up"><small><u>Sign up here.</u></small></a> Or, maybe you <a href="/password_reset">forgot your password?</a></p>
-        <hr>
-        <form class="form-horizontal" method="post">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-                <div class="alert alert-danger">{{ form.non_field_errors|join:"<br \>" }}</div>
-            {% endif %}
-
-            {% for field in form %}
-                {% if field.errors %}
-                    <div class="control-group error">
-                        <label class="control-label">{{ field.label }}</label>
-                        <div class="controls">
-                            {{ field }}
-                            <p class="help-inline text-danger">
-                                {% for error in  field.errors %}<strong>{{ error }}</strong>{% endfor %}
-                            </p>
-                        </div>
-                    </div>
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="avatar">
+					<img src="{% static 'assets/icons/based.png' %}" alt="Avatar">
+				</div>				
+				<h4 class="modal-title">Member Login</h4>	
+			</div>
+			<div class="modal-body">
+                {% if user.is_authenticated %}
+                    <h3>You're already logged in as {{ user.get_full_name }}.</h3>
                 {% else %}
-                    <div class="control-group">
-                        <label class="control-label">{{ field.label }}</label>
-                        <div class="controls">
-                            {{ field }}
-                            {% if field.help_text %}
-                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
-                            {% endif %}
-                        </div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">{{ form.non_field_errors|join:"<br \>" }}</div>
+                    {% endif %}
+				<form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    {% if field.errors %}
+					<div class="form-group">
+                        {{ field }}
+                        <p class="help-inline text-danger">
+                            {% for error in  field.errors %}<strong>{{ error }}</strong>{% endfor %}
+                        </p>		
                     </div>
+                    {% else %}
+					<div class="form-group">
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                {% endfor %}     
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+					</div>
+                </form>
                 {% endif %}
-            {% endfor %}
-
-            <br/>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary" >Log in</button>
+			</div>
+			<div class="modal-footer">
+                <p>Need an account? <a href="/sign_up">Sign up here.</a></p>
+                <p> Or, maybe you <a href="/password_reset">forgot your password?</a></p>
             </div>
-        </form>
-
-    {% endif %}
+		</div>
+	</div>
 
 </div>
 {% endblock %}

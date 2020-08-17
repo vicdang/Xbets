@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 def welcome(request):
 
     if request.user.is_authenticated():
+        # return HttpResponseRedirect('/bets/map')
         return HttpResponseRedirect('/bets/my_bets')
     else:
         return render(request, 'base_welcome.html')
@@ -25,7 +26,7 @@ def sign_up(request):
         # check the group id
         group_id = request.POST.get('group_id')
 
-        if group_id != '' and group_id != 'cl3ms0n':
+        if group_id != '' and group_id != '11213':
             form.add_error('group_id', 'Not a valid group id.')
 
         elif form.is_valid():
@@ -93,3 +94,4 @@ def profile(request):
                    'total_won_bets': total_won_bets,
                    'total_tie_bets': total_tie_bets,
                    'total_loss_bets': total_loss_bets})
+

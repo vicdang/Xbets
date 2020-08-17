@@ -1,11 +1,14 @@
 {% extends "base.html" %}
-    {% block breadcrumb %}
-<ul class="breadcrumb">
-  <li><a href="{% url 'admin:index' %}">Home</a></li>
-  <li><a href="{% url 'admin:index' %}">Level 1</a></li>
-  <li class="active">Level 2</li>
-</ul>
-{% endblock breadcrumb %}
+
+<!-- Breadcrumbs -->
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Stats" bets.views.your_stats.index %}
+{% endblock %}
+<!-- End Breadcrumbs -->
+
 {% block base_content %}
 <div class="container pages">
     <h3>Your Stats<small>
@@ -20,10 +23,10 @@
                 <div class="panel status panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title text-center">
-                            {% if user.userprofile.overall_winnings < 0 %}
-                                -{{ user.userprofile.overall_winnings|stringformat:"+d"|slice:"1:" }}
+                            {% if user.userprofile.overall_winnings >= 0 %}
+                                {{ user.userprofile.overall_winnings|stringformat:"+d"|slice:"1:" }}
                             {% else %}
-                                {{ user.userprofile.overall_winnings }}
+                                -{{ user.userprofile.overall_winnings }}
                             {% endif %}
                         </h1>
                     </div>
@@ -36,10 +39,10 @@
                 <div class="panel status panel-info">
                     <div class="panel-heading">
                         <h1 class="panel-title text-center">
-                            {% if user.userprofile.current_balance < 0 %}
-                                -{{ user.userprofile.current_balance|stringformat:"+d"|slice:"1:" }}
+                            {% if user.userprofile.current_balance >= 0 %}
+                                {{ user.userprofile.current_balance|stringformat:"+d"|slice:"1:" }}
                             {% else %}
-                                {{ user.userprofile.current_balance }}
+                                -{{ user.userprofile.current_balance }}
                             {% endif %}
                         </h1>
                     </div>

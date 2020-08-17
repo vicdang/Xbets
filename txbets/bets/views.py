@@ -133,7 +133,7 @@ def my_bets(request):
                    'your_active_bets_count': your_active_bets_count,
                    'your_active_bets_total_amount': your_active_bets_total_amount})
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def open_bets(request):
 
     # used for expiring soon and new bet tags

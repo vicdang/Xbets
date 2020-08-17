@@ -27,7 +27,8 @@
         {% endblock %}
     </head>
 
-    <body alt="txbets bg" style="background-image: url({% static 'assets/images/txbets_bg.png' %})">
+    <!-- <body alt="txbets bg" style="background-image: url({% static 'assets/images/txbets_bg.png' %})"> -->
+    <body alt="txbets bg" style="background-color: #fff;"></body>
         <nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
             <div class="container nav-div">
                 <div class="navbar-header navbar-left pull-left">
@@ -44,7 +45,9 @@
                 <div class="navbar-header navbar-right pull-right">
                     <ul class="nav pull-left">
                         {% if user.is_authenticated %}
+                        {% if user.is_staff %}
                         <button type="button" class="btn btn-default navbar-btn" style="margin-right: 15px;" data-toggle="modal" data-target="#place_bets">Place Bet</button>
+                        {% endif %}
                         {% endif %}
                         {% if user.is_authenticated %}
                         <li class="dropdown pull-right">
@@ -114,6 +117,10 @@
                 <div class="collapse navbar-collapse">
                     {% if user.is_authenticated %}
                         <ul class="nav navbar-nav navbar-left">
+                            <li class="{% if nbar == 'map' %}active{% endif %}"><a href="/bets/map">Map</a></li>
+                            <li class="{% if nbar == 'ranking' %}active{% endif %}"><a href="/bets/ranking">Ranking</a></li>
+                            <li class="{% if nbar == 'matches' %}active{% endif %}"><a href="/bets/matches">Matches</a></li>
+                            <li class="{% if nbar == 'rules' %}active{% endif %}"><a href="/bets/rules">Rules</a></li>
                             <li class="{% if nbar == 'stats' %}active{% endif %}"><a href="/bets/your_stats">Stats</a></li>
                             <li class="{% if nbar == 'my_bets' %}active{% endif %}"><a href="/bets/my_bets">My Bets</a></li>
                             <li class="{% if nbar == 'open_bets' %}active{% endif %}"><a href="/bets/open_bets">Open Bets</a></li>
@@ -140,10 +147,23 @@
             </div>
         {% endfor %}
         </div>
-        {% block breadcrumb %}
+ 
+        
+        {% load django_bootstrap_breadcrumbs %}
 
-        {% endblock breadcrumb %}
-        {% block content %}{% endblock content %}
+        <!-- Breadcrumbs -->
+        {% load django_bootstrap_breadcrumbs %}
+
+        {% block breadcrumbs %}
+            {% clear_breadcrumbs %}
+            {% breadcrumb "Home" "/welcome" %}
+        {% endblock %}
+
+        {% block content %}
+            {% render_breadcrumbs %}
+        {% endblock %}
+        <!-- Breadcrumbs -->
+        
         <!-- Main jumbotron for a primary marketing message or call to action -->
         {% block base_content %}
         <div class="jumbotron">
