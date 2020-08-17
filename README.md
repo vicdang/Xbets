@@ -1,5 +1,11 @@
 # txbets
-College football betting web app, built with django/bootstrap/jquery
+Football betting web app, built with django/bootstrap/jquery
+
+## Guide line:
+ - python manage.py makemigrations
+ - python manage.py migrate
+ - python manage.py createsuperuser
+ - python manage.py runserver
 
 ## User Features:
  - Post prop bet with description, bet amount, quantity allowed, and an expiration date
