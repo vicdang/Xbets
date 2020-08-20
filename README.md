@@ -1,6 +1,10 @@
 # txbets
 Football betting web app, built with django/bootstrap/jquery
 
+## Requirement:
+ - Python 2.7.12 or above
+ - Django 1.11 or above
+ 
 ## Guide line:
  - python manage.py makemigrations
  - python manage.py migrate
@@ -18,8 +22,17 @@ Football betting web app, built with django/bootstrap/jquery
  - User profile settings
  - Stats! (user and global)
 
- 
 ## Admin Features:
  - Set win/loss/tie for open or expired prop bets (only those that have at least one accepted bet)
  - Undo win/loss/tie from completed bet
  - Regular django admin site stuff
+
+## Upcomming Features:
+ - Map page - show all teams of a specific league, by table, and show match map
+  + matches
+  + venues
+  + times, stages, match result
+ - Ranking page
+ - Rule page
+ - Matches page
+ - Genegrate group ID for registration.
