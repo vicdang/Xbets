@@ -26,6 +26,9 @@ Football betting web app, built with django/bootstrap/jquery
  - Set win/loss/tie for open or expired prop bets (only those that have at least one accepted bet)
  - Undo win/loss/tie from completed bet
  - Regular django admin site stuff
+ 
+## Running server on AWS
+ - http://13.212.24.195
 
 ## Upcomming Features:
  - Map page - show all teams of a specific league, by table, and show match map
