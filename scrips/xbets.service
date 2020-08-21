@@ -1,0 +1,16 @@
+# add to /etc/systemd/system/
+
+[Unit]
+Description=Xbets
+
+[Service]
+User=root
+Group=root
+Restart=on-failure
+Environment=XBET_HOME=/home/ubuntu/Xbets/txbets
+UMask=007
+
+TimeoutStopSec=30
+ExecStartPre=/home/ubuntu/Xbets/txbets/xbets.sh pre-start
+ExecStart=/home/ubuntu/Xbets/txbets/xbets.sh start
+ExecStopPost=/home/ubuntu/Xbets/txbets/xbets.sh post-stop
