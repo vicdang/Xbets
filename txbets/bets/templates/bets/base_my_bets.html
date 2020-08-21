@@ -56,7 +56,7 @@
                         <th>Max Bets</th>
                         <th>Bets Remain</th>
                         <th>End Date</th>
-                        <th>Act</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +81,10 @@
                 </tbody>
             </table>
         {% else %}
-            <p>You don't have any opening bets. {% if user.is_staff %} Step right up and <a href="#place_bets" data-toggle="modal">place a bet.</a> {% endif %}</p>
+        <div class="alert alert-success alert-dismissible">
+            <p>You don't have any opening bets. {% if user.is_staff %} Step right up and 
+                <a href="#place_bets" data-toggle="modal"><b><em>place a bet</em></b></a>. {% endif %}</p>
+        </div>
         {% endif %}
     </div>
 
@@ -117,7 +120,7 @@
                 </tbody>
             </table>
         {% else %}
-            <p>You don't have any active bets. How about accepting some <a href="/bets/open_bets">open bets?</a></p>
+        <div class="alert alert-success alert-dismissible"><p>You don't have any active bets. How about accepting some <a href="/bets/open_bets"><b><em>open bets?</em></b></a></p></div>
         {% endif %}
     </div>
 
@@ -148,8 +151,10 @@
                 <h4 class="modal-title" id="RemoveBet">Remove Bet</h4>
             </div>
             <div class="modal-body">
-                <p>Remove your prop bet "<strong><span id="betId"></span></strong>"?</p>
-                <p><small><i>Note: Any accepted bets against this prop <strong>will remain</strong> accepted.</i></small></p>
+                <h3>Remove your prop bet "<strong><span id="betId"></span></strong>"?</h3>
+                <div class="alert alert-warning alert-dismissible">
+                    <p><small><i>Note: Any accepted bets against this prop <strong>will remain</strong> accepted.</i></small></p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

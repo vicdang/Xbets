@@ -127,6 +127,14 @@
                             <li class="{% if nbar == 'all_bets' %}active{% endif %}"><a href="/bets/all_bets">All Bets</a></li>
                         </ul>
                     {% else %}
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="{% if nbar == 'map' %}active{% endif %}"><a href="/bets/map">Map</a></li>
+                            <li class="{% if nbar == 'ranking' %}active{% endif %}"><a href="/bets/ranking">Ranking</a></li>
+                            <li class="{% if nbar == 'matches' %}active{% endif %}"><a href="/bets/matches">Matches</a></li>
+                            <li class="{% if nbar == 'rules' %}active{% endif %}"><a href="/bets/rules">Rules</a></li>
+                            <li class="{% if nbar == 'open_bets' %}active{% endif %}"><a href="/bets/open_bets">Open Bets</a></li>
+                            <li class="{% if nbar == 'all_bets' %}active{% endif %}"><a href="/bets/all_bets">All Bets</a></li>
+                        </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                             <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

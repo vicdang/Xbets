@@ -139,41 +139,65 @@ def open_bets(request):
     # used for expiring soon and new bet tags
     tomorrow = timezone.now() + timezone.timedelta(days=1)
     yesterday = timezone.now() + timezone.timedelta(days=-1)
-
+    print(request.user)
     # get the current user
-    current_user = request.user
+    if request.user.is_anonymous:
+        allow_accept = False
 
-    # get all open prop bets from other users
-    open_bets = ProposedBet.objects.filter(
-        remaining_wagers__gt=0,
-        end_date__gt=timezone.now(),
-        won_bet__isnull=True).exclude(
-        user=current_user)
+        # get all open prop bets from other users
+        open_bets = ProposedBet.objects.filter(
+            remaining_wagers__gt=0,
+            end_date__gt=timezone.now(),
+            won_bet__isnull=True)
 
-    # get all bets created in past 24 hours
-    new_bets = ProposedBet.objects.filter(
-        remaining_wagers__gt=0,
-        end_date__gt=timezone.now(),
-        created_on__gt=yesterday,
-        won_bet__isnull=True).exclude(
-        user=current_user)
+        # get all bets created in past 24 hours
+        new_bets = ProposedBet.objects.filter(
+            remaining_wagers__gt=0,
+            end_date__gt=timezone.now(),
+            created_on__gt=yesterday,
+            won_bet__isnull=True)
 
-    # get all bets expiring in next 24 hours
-    closing_soon_bets = ProposedBet.objects.filter(
-        remaining_wagers__gt=0,
-        end_date__gt=timezone.now(),
-        end_date__lt=tomorrow,
-        won_bet__isnull=True).exclude(
-        user=current_user)
+        # get all bets expiring in next 24 hours
+        closing_soon_bets = ProposedBet.objects.filter(
+            remaining_wagers__gt=0,
+            end_date__gt=timezone.now(),
+            end_date__lt=tomorrow,
+            won_bet__isnull=True)
+    else:
+        current_user = request.user
+        allow_accept = True
+        # get all open prop bets from other users
+        open_bets = ProposedBet.objects.filter(
+            remaining_wagers__gt=0,
+            end_date__gt=timezone.now(),
+            won_bet__isnull=True).exclude(
+            user=current_user)
+
+        # get all bets created in past 24 hours
+        new_bets = ProposedBet.objects.filter(
+            remaining_wagers__gt=0,
+            end_date__gt=timezone.now(),
+            created_on__gt=yesterday,
+            won_bet__isnull=True).exclude(
+            user=current_user)
+
+        # get all bets expiring in next 24 hours
+        closing_soon_bets = ProposedBet.objects.filter(
+            remaining_wagers__gt=0,
+            end_date__gt=timezone.now(),
+            end_date__lt=tomorrow,
+            won_bet__isnull=True).exclude(
+            user=current_user)
 
     return render(request,
                   'bets/base_open_bets.html',
                   {'nbar': 'open_bets',
                    'open_bets': open_bets,
                    'new_bets': new_bets,
-                   'closing_soon_bets': closing_soon_bets})
+                   'closing_soon_bets': closing_soon_bets,
+                   'allow_accept': allow_accept})
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def all_bets(request):
 
     # get all active accepted bets
@@ -353,7 +377,7 @@ def place_bets_form_process(request, next_url):
                 "color":"#36a64f", \
                 "pretext":"A new bet was posted, <!here>:", \
                 "author_name":request.user.get_full_name(), \
-                "title":"($" + str(form.cleaned_data['bet_amount']) + ") " \
+                "title":"(" + str(form.cleaned_data['bet_amount']) + ") " \
                 + form.cleaned_data['bet'],"title_link":"https://txbets.us/bets/open_bets/"}]}
 
             # slack_response = requests.post(slack_webhook_url, json=slack_data)
