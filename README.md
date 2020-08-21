@@ -37,3 +37,6 @@ Football betting web app, built with django/bootstrap/jquery
  - Matches page
  - Genegrate group ID for registration.
  - Customize admin view to show data row in detailed.
+ 
+## Related template:
+https://betting.team/en/football
