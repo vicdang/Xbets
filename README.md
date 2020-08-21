@@ -29,10 +29,11 @@ Football betting web app, built with django/bootstrap/jquery
 
 ## Upcomming Features:
  - Map page - show all teams of a specific league, by table, and show match map
-  + matches
-  + venues
-  + times, stages, match result
+   + matches
+   + venues
+   + times, stages, match result
  - Ranking page
  - Rule page
  - Matches page
  - Genegrate group ID for registration.
+ - Customize admin view to show data row in detailed.
