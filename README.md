@@ -1,4 +1,4 @@
-# txbets
+# Xbets
 Football betting web app, built with django/bootstrap/jquery
 
 ## Requirement:
