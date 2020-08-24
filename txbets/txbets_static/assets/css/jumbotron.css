@@ -5,6 +5,11 @@ body {
   color: #505050;
 }
 
+@media (min-width: 1590px) {
+    .container {
+      width: 1580px;
+    }
+}
 .navbar-right {
     margin-right: 0px;
 }

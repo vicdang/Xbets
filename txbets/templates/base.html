@@ -66,24 +66,24 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <p class="text-left"><strong>{{ user.get_full_name }}</strong></p>
-                                                <p class="text-left small">{{ user.email }}</p>
+                                                <p class="text-left small">Email: <a href="mailto:{{ user.email}}"><em>{{ user.email }}</em></a></p>
                                                 <p class="text-left small">Current Balance: <strong>
                                                     {% if user.userprofile.current_balance < 0 %}
-                                                        <font color="red">-{{ user.userprofile.current_balance|stringformat:"+d"|slice:"1:" }}</font>
+                                                        <font color="red">-{{ user.userprofile.current_balance|stringformat:"+d"|slice:"1:" }}<small> coins</small></font>
                                                     {% elif user.userprofile.current_balance > 0 %}
-                                                        <font color="green">{{ user.userprofile.current_balance }}</font>
+                                                        <font color="green">{{ user.userprofile.current_balance }}<small> coins</small></font>
                                                     {% else %}
-                                                        {{ user.userprofile.current_balance }}
+                                                        {{ user.userprofile.current_balance }}<small> coins</small>
                                                     {% endif %}
                                                     </strong>
                                                 </p>
                                                 <p class="text-left small">Overall Winnings: <strong>
                                                     {% if user.userprofile.overall_winnings < 0 %}
-                                                        <font color="red">-{{ user.userprofile.overall_winnings|stringformat:"+d"|slice:"1:" }}</font>
+                                                        <font color="red">-{{ user.userprofile.overall_winnings|stringformat:"+d"|slice:"1:" }}<small> coins</small></font>
                                                     {% elif user.userprofile.overall_winnings > 0 %}
-                                                        <font color="green">{{ user.userprofile.overall_winnings }}</font>
+                                                        <font color="green">{{ user.userprofile.overall_winnings }}<small> coins</small></font>
                                                     {% else %}
-                                                        {{ user.userprofile.overall_winnings }}
+                                                        {{ user.userprofile.overall_winnings }}<small> coins</small>
                                                     {% endif %}
                                                     </strong>
                                                 </p>

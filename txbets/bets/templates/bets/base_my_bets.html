@@ -114,7 +114,7 @@
                             <td>{{ bet.accepted_prop.user.get_full_name }}</td>
                             <td>{{ bet.accepted_user.get_full_name }}</td>
                             <td>{{ bet.accepted_prop.prop_text }}</td>
-                            <td>{{ bet.accepted_prop.prop_wager }}</td>
+                            <td>{{ bet.accepted_prop.prop_wager }}<small> coins</small></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -130,7 +130,7 @@
             <thead>
                 <tr>
                     <th>{% trans "Prop Bet" %}</th>
-                    <th>{% trans "Wager" %}</th>
+                    <th>{% trans "Wager" %}<small>(coins)</small></th>
                     <th>{% trans "Against" %}</th>
                     <th>{% trans "Winner" %}</th>
                 </tr>

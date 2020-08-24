@@ -8,7 +8,7 @@ class PlaceBetsForm(forms.Form):
         attrs={'placeholder': 'E.g. Clemson -48.5 over USCjr', 'autocomplete': 'off'}))
 
     bet_amount = forms.IntegerField(
-        label='Bet Amount (USD)',
+        label='Bet Amount(coins)',
         initial=5,
         min_value=1,
         max_value=20,

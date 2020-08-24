@@ -12,16 +12,17 @@
 
     <div class="container">
     {% if open_bets %}
-        <div class="alert alert-success alert-dismissible"><p>These are all the open bets from other users!</p></div>
+        <div class="alert alert-success alert-dismissible"><p>These are all the open bets!</p></div>
         <table class="table table-striped table-bordered table-condensed table-responsive" id=openBets>
             <thead>
                 <tr>
                     <th>Prop Bet</th>
                     <th>User</th>
+                    <th>Email</th>
                     <th>Wager</th>
                     <th>Bets Remain</th>
                     <th>End Date</th>
-                    {% if bet.allow_accept %}
+                    {% if allow_accept %}
                     <th>Action</th>
                     {% endif %}
                 </tr>
@@ -40,10 +41,11 @@
                             {% endif %}
                         </td>
                         <td>{{ bet.user.get_full_name }}</td>
-                        <td>{{ bet.prop_wager }}</td>
+                        <td>{{ bet.user.email }}</td>
+                        <td>{{ bet.prop_wager }} <small>coins</small></td>
                         <td>{{ bet.remaining_wagers }}</td>
                         <td>{{ bet.end_date|date:"M d Y H:i" }}</td>
-                        {% if bet.allow_accept %}
+                        {% if allow_accept %}
                         <td><div class="acceptBetButton">
                                 <a href="#" data-href="/bets/accept_prop_bet?id={{ bet.id }}"
                                     data-target="#acceptBet" data-toggle="modal"
@@ -76,7 +78,7 @@
             </div>
             <div class="modal-body">
                 <span id="duplicateBet"></span>
-                <p>Accept <strong>_<span id="betAmount"></span></strong> bet
+                <p>Accept <strong><span id="betAmount"></span> coins</strong> bet
                     "<strong><span id="betId"></span>"</strong>
                     proposed by <span id="betUser"></span>?
                 </p>

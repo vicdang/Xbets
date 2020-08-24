@@ -139,56 +139,32 @@ def open_bets(request):
     # used for expiring soon and new bet tags
     tomorrow = timezone.now() + timezone.timedelta(days=1)
     yesterday = timezone.now() + timezone.timedelta(days=-1)
-    print(request.user)
     # get the current user
     if request.user.is_anonymous:
         allow_accept = False
-
-        # get all open prop bets from other users
-        open_bets = ProposedBet.objects.filter(
-            remaining_wagers__gt=0,
-            end_date__gt=timezone.now(),
-            won_bet__isnull=True)
-
-        # get all bets created in past 24 hours
-        new_bets = ProposedBet.objects.filter(
-            remaining_wagers__gt=0,
-            end_date__gt=timezone.now(),
-            created_on__gt=yesterday,
-            won_bet__isnull=True)
-
-        # get all bets expiring in next 24 hours
-        closing_soon_bets = ProposedBet.objects.filter(
-            remaining_wagers__gt=0,
-            end_date__gt=timezone.now(),
-            end_date__lt=tomorrow,
-            won_bet__isnull=True)
     else:
-        current_user = request.user
         allow_accept = True
-        # get all open prop bets from other users
-        open_bets = ProposedBet.objects.filter(
-            remaining_wagers__gt=0,
-            end_date__gt=timezone.now(),
-            won_bet__isnull=True).exclude(
-            user=current_user)
 
-        # get all bets created in past 24 hours
-        new_bets = ProposedBet.objects.filter(
-            remaining_wagers__gt=0,
-            end_date__gt=timezone.now(),
-            created_on__gt=yesterday,
-            won_bet__isnull=True).exclude(
-            user=current_user)
+    # get all open prop bets from other users
+    open_bets = ProposedBet.objects.filter(
+        remaining_wagers__gt=0,
+        end_date__gt=timezone.now(),
+        won_bet__isnull=True)
 
-        # get all bets expiring in next 24 hours
-        closing_soon_bets = ProposedBet.objects.filter(
-            remaining_wagers__gt=0,
-            end_date__gt=timezone.now(),
-            end_date__lt=tomorrow,
-            won_bet__isnull=True).exclude(
-            user=current_user)
+    # get all bets created in past 24 hours
+    new_bets = ProposedBet.objects.filter(
+        remaining_wagers__gt=0,
+        end_date__gt=timezone.now(),
+        created_on__gt=yesterday,
+        won_bet__isnull=True)
 
+    # get all bets expiring in next 24 hours
+    closing_soon_bets = ProposedBet.objects.filter(
+        remaining_wagers__gt=0,
+        end_date__gt=timezone.now(),
+        end_date__lt=tomorrow,
+        won_bet__isnull=True)
+    
     return render(request,
                   'bets/base_open_bets.html',
                   {'nbar': 'open_bets',
@@ -258,7 +234,7 @@ class MyCompletedBetsJson(BaseDatatableView):
 
             json_data.append([
                 item.accepted_prop.prop_text,
-                ' ' + str(item.accepted_prop.prop_wager),
+                str(item.accepted_prop.prop_wager) + ' coins',
                 bet_against_user,
                 who_won
             ])
@@ -306,7 +282,7 @@ class AllBetsJson(BaseDatatableView):
                 item.accepted_prop.user.get_full_name(),
                 item.accepted_user.get_full_name(),
                 item.accepted_prop.prop_text,
-                '$' + str(item.accepted_prop.prop_wager),
+                str(item.accepted_prop.prop_wager) + ' coins',
                 who_won
             ])
 

@@ -22,13 +22,13 @@
                 <div class="panel status panel-primary">
                     <div class="panel-heading">
                         {% if global_stats.total_money %}
-                            <h1 class="panel-title text-center">{{ global_stats.total_money }}</h1>
+                            <h1 class="panel-title text-center">{{ global_stats.total_money }}<small> coins</small></h1>
                         {% else %}
-                            <h1 class="panel-title text-center">0</h1>
+                            <h1 class="panel-title text-center">0<small> coins</small></h1>
                         {% endif %}
                     </div>
                     <div class="panel-body text-center">
-                        <strong>total amount bet</strong>
+                        <strong>Total amount bet</strong>
                     </div>
                 </div>
             </div>
@@ -36,13 +36,13 @@
                 <div class="panel status panel-default">
                     <div class="panel-heading">
                         {% if global_stats.total_money_won %}
-                            <h1 class="panel-title text-center">{{ global_stats.total_money_won }}</h1>
+                            <h1 class="panel-title text-center">{{ global_stats.total_money_won }}<small> coins</small></h1>
                         {% else %}
-                            <h1 class="panel-title text-center">0</h1>
+                            <h1 class="panel-title text-center">0<small> coins</small></h1>
                         {% endif %}
                     </div>
                     <div class="panel-body text-center">
-                        <strong>total amount won</strong>
+                        <strong>Total amount won</strong>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <h1 class="panel-title text-center">{{ global_stats.total_proposed }}</h1>
                     </div>
                     <div class="panel-body text-center">
-                        <strong>total bets proposed</strong>
+                        <strong>Total bets proposed</strong>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         <h1 class="panel-title text-center">{{ global_stats.total_accepted }}</h1>
                     </div>
                     <div class="panel-body text-center">
-                        <strong>total bets accepted</strong>
+                        <strong>Total bets accepted</strong>
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                                 <th>{{ entry.total_won }}</th>
                                 <th>{{ entry.total_lost }}</th>
                                 <th>{{ entry.total_tie }}</th>
-                                <th>{{ entry.win_percentage }}</th>
+                                <th>{{ entry.win_percentage }}<small>%</small></th>
                             </tr>
                             {% endfor %}
                         </table>
