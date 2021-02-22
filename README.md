@@ -31,6 +31,8 @@ Football betting web app, built with django/bootstrap/jquery
  - http://13.212.24.195
 
 ## Upcomming Features:
+ - Add CSRF Token:
+   + https://docs.djangoproject.com/en/2.2/ref/csrf/
  - Map page - show all teams of a specific league, by table, and show match map
    + matches
    + venues
